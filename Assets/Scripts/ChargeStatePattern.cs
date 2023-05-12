@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public interface IChargeContext {
-    public void SetState(IChargeState newState, int seconds);
+    public void SetState(IChargeState newState);
 }
 
 public class ChargeStatePattern : MonoBehaviour, IChargeContext {
@@ -25,9 +25,8 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
         currentState.UpdateState(this);
     }
 
-    public void SetState(IChargeState newState, int seconds) {
-        StartCoroutine(RunSleep(newState, seconds));
-        
+    public void SetState(IChargeState newState) {
+        StartCoroutine(RunSleep(newState, 1));
     }
 
     IEnumerator RunSleep(IChargeState newState, int seconds) {
@@ -48,7 +47,7 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
             }
             QueueProvider.chargePlayerPosition = "ChargeSite2";
         }
-
+        
         if (other.gameObject.tag == "ChargeSite2") {
             QueueProvider.chargePlayerPosition = "ShakeSite1";
         }
