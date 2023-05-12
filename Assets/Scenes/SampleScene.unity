@@ -3210,7 +3210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1360657195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a5a903c38eb7c70822bd0a56c0b3fe, type: 3}
+  m_Script: {fileID: 11500000, guid: d7956c669745a5a709e4fff12398bfff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1361736335
@@ -3459,7 +3459,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439361473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7dc99d5784a6af23ba9c97e5852bb49, type: 3}
+  m_Script: {fileID: 11500000, guid: b836c7e97a73281bc9523ea41e537caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1454464390
@@ -4005,10 +4005,10 @@ GameObject:
   - component: {fileID: 1838901117}
   - component: {fileID: 1838901116}
   - component: {fileID: 1838901118}
-  - component: {fileID: 1838901119}
   - component: {fileID: 1838901122}
   - component: {fileID: 1838901121}
   - component: {fileID: 1838901120}
+  - component: {fileID: 1838901123}
   m_Layer: 0
   m_Name: CounterBob
   m_TagString: Untagged
@@ -4104,18 +4104,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1838901119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838901115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86804c706e32816a0b8936e8f2353251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1838901120
 Rigidbody2D:
   serializedVersion: 4
@@ -4185,6 +4173,18 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1838901123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838901115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895e4b3a375301536b6dca293cd05e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1851153138
 GameObject:
   m_ObjectHideFlags: 0

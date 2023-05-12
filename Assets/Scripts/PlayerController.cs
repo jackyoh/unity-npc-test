@@ -17,14 +17,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if (!beingHandled) {
+        if (!beingHandled)
             StartCoroutine(generatePlayer());
-        }
     }
 
     IEnumerator generatePlayer() {
         beingHandled = true;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         var position = GameObject.FindGameObjectsWithTag("Point")[0].transform.position;
         if (QueueProvider.playerQueue.Count <= 4) {
             Instantiate(prefab, position, Quaternion.identity);

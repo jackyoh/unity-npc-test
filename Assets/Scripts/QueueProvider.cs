@@ -16,4 +16,7 @@ public class QueueProvider {
 
     public static int[] playerArray;
     public static Queue playerQueue = new Queue();
+
+    public static string chargePlayerPosition = "ChargeSite2";
+    public static string shakePlayerPosition = "ShakeSite2";
 }

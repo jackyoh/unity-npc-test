@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator payCompleted() {
         yield return new WaitUntil(() => 
-            QueueProvider.counterStatus == "wait" && 
+            //QueueProvider.counterStatus == "wait" && 
             QueueProvider.chargeQueue[0].Count == 0 && 
             QueueProvider.shakeQueue[0].Count == 0 &&
             QueueProvider.chargeQueue[1].Count == 0 &&
