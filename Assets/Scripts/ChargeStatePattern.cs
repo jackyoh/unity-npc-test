@@ -37,6 +37,7 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "ShakeSite1") {
+            QueueProvider.chargePlayerPosition = "ChargeSite2";
             for (int i = 0; i < QueueProvider.chargeQueue[0].Count; i++) {
                 var order = QueueProvider.chargeQueue[0].Dequeue();
                 QueueProvider.shakeQueue[0].Enqueue(order);
@@ -45,7 +46,6 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
                 var order = QueueProvider.chargeQueue[1].Dequeue();
                 QueueProvider.shakeQueue[1].Enqueue(order);
             }
-            QueueProvider.chargePlayerPosition = "ChargeSite2";
         }
         
         if (other.gameObject.tag == "ChargeSite2") {

@@ -6,9 +6,10 @@ using UnityEngine.AI;
 public class ChargeGiveState : IChargeState {
 
     public void UpdateState(IChargeContext context) {
-        if (QueueProvider.chargeQueue[0].Count > 0 || QueueProvider.chargeQueue[1].Count > 0) {
+        /*if (QueueProvider.chargeQueue[0].Count > 0 || QueueProvider.chargeQueue[1].Count > 0) {
             context.SetState(new ChargeWaitState());
-        }
+        }*/
+        context.SetState(new ChargeWaitState());
     }
 
     public IEnumerator MoveCharge(GameObject gameObject, Animator animator, NavMeshAgent agent) {

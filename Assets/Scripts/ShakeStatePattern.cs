@@ -47,6 +47,7 @@ public class ShakeStatePattern : MonoBehaviour, IShakeContext {
                 QueueProvider.resultQueue.Enqueue(order);
             }
         }
+        
         if (other.gameObject.tag == "ShakeSite2") {
             QueueProvider.shakePlayerPosition = "CounterSite2";
         }
