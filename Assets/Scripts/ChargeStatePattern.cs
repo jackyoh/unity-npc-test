@@ -47,7 +47,6 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
                 QueueProvider.shakeQueue[1].Enqueue(order);
             }
         }
-        
         if (other.gameObject.tag == "ChargeSite2") {
             QueueProvider.chargePlayerPosition = "ShakeSite1";
         }
