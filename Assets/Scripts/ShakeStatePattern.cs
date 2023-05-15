@@ -39,12 +39,12 @@ public class ShakeStatePattern : MonoBehaviour, IShakeContext {
         if (other.gameObject.tag == "CounterSite2") {
             QueueProvider.shakePlayerPosition = "ShakeSite2";
             for (int i = 0 ; i < QueueProvider.shakeQueue[0].Count ; i++) {
-                var order = QueueProvider.shakeQueue[0].Dequeue();
-                QueueProvider.resultQueue.Enqueue(order);
+                QueueProvider.shakeQueue[0].Dequeue();
+                //QueueProvider.resultQueue.Enqueue(order);
             }
             for (int i = 0 ; i < QueueProvider.shakeQueue[1].Count ; i++) {
-                var order = QueueProvider.shakeQueue[1].Dequeue();
-                QueueProvider.resultQueue.Enqueue(order);
+                QueueProvider.shakeQueue[1].Dequeue();
+                //QueueProvider.resultQueue.Enqueue(order);
             }
         }
         
