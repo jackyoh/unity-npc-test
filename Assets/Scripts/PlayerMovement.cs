@@ -19,12 +19,12 @@ public class PlayerMovement : MonoBehaviour {
     private bool arrivePoint = false;
 
     void Awake() {
-        for (int i = 0 ; i < 5; i++) {
-            buyDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[i]);
+        for (int i = 1 ; i <= 5; i++) {
+            buyDrinks.Add(GameObject.Find("Point" + i));
         }
 
-        for (int i = 5 ; i < 10 ; i++) {
-            waitDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[i]);
+        for (int i = 6 ; i <= 10 ; i++) {
+            waitDrinks.Add(GameObject.Find("Point" + i));
         }
 
         getDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[8]);
