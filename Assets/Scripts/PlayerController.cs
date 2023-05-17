@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject prefab;
     
     void Start() {
-        var position = GameObject.FindGameObjectsWithTag("Point")[0].transform.position;
+        var position = GameObject.Find("Point1").transform.position;
         QueueProvider.playerArray = new int[5];
         for (int i = 0 ; i < 5 ; i++) {
             QueueProvider.playerArray[i] = 0;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     IEnumerator generatePlayer() {
         beingHandled = true;
         yield return new WaitForSeconds(3);
-        var position = GameObject.FindGameObjectsWithTag("Point")[0].transform.position;
+        var position = GameObject.Find("Point1").transform.position;
         if (QueueProvider.playerQueue.Count <= 4) {
             Instantiate(prefab, position, Quaternion.identity);
             QueueProvider.playerQueue.Enqueue("player");

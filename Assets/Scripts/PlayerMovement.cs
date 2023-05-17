@@ -22,20 +22,19 @@ public class PlayerMovement : MonoBehaviour {
         for (int i = 1 ; i <= 5; i++) {
             buyDrinks.Add(GameObject.Find("Point" + i));
         }
-
         for (int i = 6 ; i <= 10 ; i++) {
             waitDrinks.Add(GameObject.Find("Point" + i));
         }
 
-        getDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[8]);
-        getDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[7]);
-        getDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[6]);
-        getDrinks.Add(GameObject.FindGameObjectsWithTag("Point")[5]);
-        getDrinks.Add(GameObject.FindGameObjectsWithTag("GetDrinks")[0]);
+        getDrinks.Add(GameObject.Find("Point9"));
+        getDrinks.Add(GameObject.Find("Point8"));
+        getDrinks.Add(GameObject.Find("Point7"));
+        getDrinks.Add(GameObject.Find("Point6"));
+        getDrinks.Add(GameObject.Find("GetDrinks"));
 
-        leaves.Add(GameObject.FindGameObjectsWithTag("Point")[5]);
-        leaves.Add(GameObject.FindGameObjectsWithTag("Point")[6]);
-        leaves.Add(GameObject.FindGameObjectsWithTag("Point")[10]);
+        leaves.Add(GameObject.Find("Point6"));
+        leaves.Add(GameObject.Find("Point7"));
+        leaves.Add(GameObject.Find("Point11"));
     }
     
     void Start() {
