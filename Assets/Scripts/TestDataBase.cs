@@ -32,7 +32,6 @@ public class TestDataBase : MonoBehaviour {
         IDataReader reader2 = cmd_read.ExecuteReader();
 
         while (reader2.Read()) {
-            // Debug.Log("val:" + reader2[1].ToString());
             textComponent.text = reader2[0].ToString();
         }
         dbcon.Close();
