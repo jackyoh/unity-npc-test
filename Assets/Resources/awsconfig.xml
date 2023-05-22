@@ -1,0 +1,5 @@
+<mobileAnalytics sessionTimeout = "5"
+                 maxDBSize = "5242880"
+                 dbWarningThreshold = "0.9"
+                 maxRequestSize = "102400"
+                 allowUseDataNetwork = "false"/>
