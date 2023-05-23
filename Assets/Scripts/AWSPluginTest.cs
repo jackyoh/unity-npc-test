@@ -56,6 +56,9 @@ public class AWSPluginTest : MonoBehaviour {
         
         //------------------------------------------------------------------
         // Get third-part test
+        Application.runInBackground = true;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         cognitoService = new AmazonCognitoIdentityProviderClient(
             new AnonymousAWSCredentials(), RegionEndpoint.USEast1);
         
