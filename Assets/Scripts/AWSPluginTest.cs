@@ -44,20 +44,17 @@ public class AWSPluginTest : MonoBehaviour {
         var request = new ListObjectsRequest() {
             BucketName = "amplify-unitytest-dev-164133-deployment"
         };
-
-        string result = "";
+        
         s3Client.ListObjectsAsync(request, (responseObject) => {
             responseObject.Response.S3Objects.ForEach((o) => {
                 if (responseObject.Exception == null) {
                     responseObject.Response.S3Objects.ForEach((o) => {
                         textComponent.text = o.Key;
                     });
-                } else {
-                    Debug.Log(responseObject.Exception);
                 }
             });
         });
-        Debug.Log("Result:" + result);
+
         /*cognitoService = new AmazonCognitoIdentityProviderClient(
             new AnonymousAWSCredentials(), RegionEndpoint.USEast1);*/
         
