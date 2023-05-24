@@ -21,7 +21,7 @@ public class ShakeWorkState : IShakeState {
     }
 
     public void Execute(IShakeContext context) {
-        // TODO
+        // Nothing
     }
 
     public string GetStateName() {

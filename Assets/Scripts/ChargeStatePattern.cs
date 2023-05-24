@@ -26,7 +26,7 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
     }
 
     public void SetState(IChargeState newState) {
-        StartCoroutine(RunSleep(newState, 1));
+        StartCoroutine(RunSleep(newState, 2));
     }
 
     IEnumerator RunSleep(IChargeState newState, int seconds) {
@@ -38,15 +38,15 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "ShakeSite1") {
             QueueProvider.chargePlayerPosition = "ChargeSite2";
-            for (int i = 0; i < QueueProvider.chargeQueue[0].Count; i++) {
+            if (QueueProvider.chargeQueue[0].Count < QueueProvider.chargeQueue[1].Count) {
+                var order = QueueProvider.chargeQueue[1].Dequeue();
+                QueueProvider.shakeQueue[1].Enqueue(order);
+            } else {
                 var order = QueueProvider.chargeQueue[0].Dequeue();
                 QueueProvider.shakeQueue[0].Enqueue(order);
             }
-            for (int i = 0; i < QueueProvider.chargeQueue[1].Count; i++) {
-                var order = QueueProvider.chargeQueue[1].Dequeue();
-                QueueProvider.shakeQueue[1].Enqueue(order);
-            }
         }
+        
         if (other.gameObject.tag == "ChargeSite2") {
             QueueProvider.chargePlayerPosition = "ShakeSite1";
         }

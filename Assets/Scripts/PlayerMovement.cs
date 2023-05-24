@@ -4,6 +4,8 @@ using UnityEngine.AI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+    private int buyDrinkWaitTime = 1;
+
     private NavMeshAgent agent;
     private NavMeshPath path;
     private Animator animator;
@@ -25,7 +27,6 @@ public class PlayerMovement : MonoBehaviour {
         for (int i = 6 ; i <= 10 ; i++) {
             waitDrinks.Add(GameObject.Find("Point" + i));
         }
-
         getDrinks.Add(GameObject.Find("Point9"));
         getDrinks.Add(GameObject.Find("Point8"));
         getDrinks.Add(GameObject.Find("Point7"));
@@ -92,20 +93,13 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     IEnumerator buyDrinksSleep() {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(buyDrinkWaitTime);
         StartCoroutine(payCompleted());
     }
 
     IEnumerator payCompleted() {
-        yield return new WaitUntil(() => 
-            QueueProvider.counterQueue.Count == 0 &&
-            QueueProvider.chargeQueue[0].Count == 0 && 
-            QueueProvider.shakeQueue[0].Count == 0 &&
-            QueueProvider.chargeQueue[1].Count == 0 &&
-            QueueProvider.shakeQueue[1].Count == 0
-        );
+        yield return new WaitUntil(() => QueueProvider.counterQueue.Count == 0);
         QueueProvider.counterQueue.Enqueue("order");
-        QueueProvider.counterStatus = "give";
         QueueProvider.playerArray[currentWaypointIndex] = 0;
         points = waitDrinks;
         pointStatus = "waitDrinks";

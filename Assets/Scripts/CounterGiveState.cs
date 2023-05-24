@@ -6,9 +6,8 @@ using UnityEngine.AI;
 public class CounterGiveState : ICounterState {
 
     public void UpdateState(ICounterContext context) {
-        if (QueueProvider.counterQueue.Count > 0) {
+        if (QueueProvider.counterQueue.Count == 0) 
             context.SetState(new CounterWaitState());
-        }
     }
 
     public IEnumerator MoveCounter(GameObject gameObject, NavMeshAgent agent) {
@@ -21,7 +20,7 @@ public class CounterGiveState : ICounterState {
     }
 
     public void Execute(ICounterContext context) {
-        // TODO
+        // Nothing
     }
 
     public string GetStateName() {
