@@ -19,6 +19,7 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         currentState = new ChargeWaitState();
+        this.SetState(currentState);
     }
 
     void Update() {
@@ -39,14 +40,17 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
         if (other.gameObject.tag == "ShakeSite1") {
             QueueProvider.chargePlayerPosition = "ChargeSite2";
             if (QueueProvider.chargeQueue[0].Count < QueueProvider.chargeQueue[1].Count) {
-                var order = QueueProvider.chargeQueue[1].Dequeue();
-                QueueProvider.shakeQueue[1].Enqueue(order);
+                if (QueueProvider.chargeQueue[1].Count > 0) {
+                    var order = QueueProvider.chargeQueue[1].Dequeue();
+                    QueueProvider.shakeQueue[1].Enqueue(order);
+                }
             } else {
-                var order = QueueProvider.chargeQueue[0].Dequeue();
-                QueueProvider.shakeQueue[0].Enqueue(order);
+                if (QueueProvider.chargeQueue[0].Count > 0) {
+                    var order = QueueProvider.chargeQueue[0].Dequeue();
+                    QueueProvider.shakeQueue[0].Enqueue(order);
+                }
             }
         }
-        
         if (other.gameObject.tag == "ChargeSite2") {
             QueueProvider.chargePlayerPosition = "ShakeSite1";
         }
