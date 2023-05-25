@@ -4,29 +4,48 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class ChargeGiveState : IChargeState {
+    private int waitSeconds;
+    private bool arriveShake = false;
+
+    public ChargeGiveState(int waitSeconds) {
+        this.waitSeconds = waitSeconds;
+    }
 
     public void UpdateState(IChargeContext context) {
-        if (QueueProvider.chargeQueue[0].Count > 0 || QueueProvider.chargeQueue[1].Count > 0) {
-            context.SetState(new ChargeWorkState());
-        } else {
-            context.SetState(new ChargeWaitState());
-        }
+        if (arriveShake) 
+            context.SetState(new ChargeWaitState(1));
     }
 
-    public IEnumerator MoveCharge(GameObject gameObject, Animator animator, NavMeshAgent agent) {
-        yield return new WaitUntil(() => QueueProvider.chargePlayerPosition == "ChargeSite2");
-        GameObject chargeSite1 = GameObject.FindGameObjectsWithTag("ChargeSite2")[0];
-        animator.SetBool("isUp", false);
+    public void MoveCharge(GameObject gameObject, Animator animator, NavMeshAgent agent) {
+        GameObject shakeSite1 = GameObject.FindGameObjectsWithTag("ShakeSite1")[0];
         NavMeshPath path = new NavMeshPath();
-        agent.SetDestination(chargeSite1.transform.position);
-        agent.CalculatePath(chargeSite1.transform.position, path);
+        agent.SetDestination(shakeSite1.transform.position);
+        agent.CalculatePath(shakeSite1.transform.position, path);
+        animator.SetBool("isUp", true);
     }
 
-    public void Execute(IChargeContext context) {
-        // Nothing
+    public void Execute(IChargeContext context, string tagName) {
+        if (tagName == "ShakeSite1") {
+            if (QueueProvider.chargeQueue[0].Count < QueueProvider.chargeQueue[1].Count) {
+                if (QueueProvider.chargeQueue[1].Count > 0) {
+                    var order = QueueProvider.chargeQueue[1].Dequeue();
+                    QueueProvider.shakeQueue[1].Enqueue(order);
+                }
+            } else {
+                if (QueueProvider.chargeQueue[0].Count > 0) {
+                    var order = QueueProvider.chargeQueue[0].Dequeue();
+                    QueueProvider.shakeQueue[0].Enqueue(order);
+                }
+            }
+            arriveShake = true;
+        }
     }
 
     public string GetStateName() {
         return "give";
+    }
+
+    public int WaitSeconds() {
+        return waitSeconds;
     }
 }

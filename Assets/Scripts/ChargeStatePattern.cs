@@ -8,6 +8,7 @@ public interface IChargeContext {
 }
 
 public class ChargeStatePattern : MonoBehaviour, IChargeContext {
+    private bool beingHandled = false;
     private NavMeshAgent agent;
     private NavMeshPath path;
     private Animator animator;
@@ -18,41 +19,27 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        currentState = new ChargeWaitState();
-        this.SetState(currentState);
+        currentState = new ChargeWaitState(0);
     }
 
     void Update() {
-        currentState.UpdateState(this);
+        if (!beingHandled)
+            currentState.UpdateState(this);
     }
 
     public void SetState(IChargeState newState) {
-        StartCoroutine(RunSleep(newState, 2));
+        currentState = newState;
+        StartCoroutine(WaitSleep(currentState.WaitSeconds()));
     }
 
-    IEnumerator RunSleep(IChargeState newState, int seconds) {
+    IEnumerator WaitSleep(int seconds) {
+        beingHandled = true;
         yield return new WaitForSeconds(seconds);
-        StartCoroutine(currentState.MoveCharge(this.gameObject, animator, agent));
-        currentState = newState;
+        currentState.MoveCharge(this.gameObject, animator, agent);
+        beingHandled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "ShakeSite1") {
-            QueueProvider.chargePlayerPosition = "ChargeSite2";
-            if (QueueProvider.chargeQueue[0].Count < QueueProvider.chargeQueue[1].Count) {
-                if (QueueProvider.chargeQueue[1].Count > 0) {
-                    var order = QueueProvider.chargeQueue[1].Dequeue();
-                    QueueProvider.shakeQueue[1].Enqueue(order);
-                }
-            } else {
-                if (QueueProvider.chargeQueue[0].Count > 0) {
-                    var order = QueueProvider.chargeQueue[0].Dequeue();
-                    QueueProvider.shakeQueue[0].Enqueue(order);
-                }
-            }
-        }
-        if (other.gameObject.tag == "ChargeSite2") {
-            QueueProvider.chargePlayerPosition = "ShakeSite1";
-        }
+        currentState.Execute(this, other.gameObject.tag);
     }
 }
