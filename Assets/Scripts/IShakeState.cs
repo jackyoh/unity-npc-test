@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public interface IShakeState {
     public void UpdateState(IShakeContext context);
-    public IEnumerator MoveShake(GameObject gameObject, Animator animator, NavMeshAgent agent);
-    public void Execute(IShakeContext context);
+    public void MoveShake(GameObject gameObject, Animator animator, NavMeshAgent agent);
+    public void Execute(IShakeContext context, string tagName);
+    public int WaitSeconds();
     public string GetStateName();
 }

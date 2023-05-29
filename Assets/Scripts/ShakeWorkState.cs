@@ -4,24 +4,26 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class ShakeWorkState : IShakeState {
+    private int waitSeconds;
+
+    public ShakeWorkState(int waitSeconds) {
+        this.waitSeconds = waitSeconds;
+    }
 
     public void UpdateState(IShakeContext context) {
-        if (QueueProvider.shakeQueue[0].Count > 0 || QueueProvider.shakeQueue[1].Count > 0)
-            context.SetState(new ShakeGiveState());
+        context.SetState(new ShakeGiveState(3));
     }
 
-    public IEnumerator MoveShake(GameObject gameObject, Animator animator, NavMeshAgent agent){
-        yield return new WaitUntil(() => QueueProvider.shakePlayerPosition == "CounterSite2");
-        GameObject counterSite2 = GameObject.FindGameObjectsWithTag("CounterSite2")[0];
-        NavMeshPath path = new NavMeshPath();
-        agent.SetDestination(counterSite2.transform.position);
-        agent.CalculatePath(counterSite2.transform.position, path);
-        animator.SetBool("isUp", false);
-        gameObject.GetComponent<SpriteRenderer>().flipX = false;   
-    }
-
-    public void Execute(IShakeContext context) {
+    public void MoveShake(GameObject gameObject, Animator animator, NavMeshAgent agent){
         // Nothing
+    }
+
+    public void Execute(IShakeContext context, string tagName) {
+        // Nothing
+    }
+
+    public int WaitSeconds() {
+        return this.waitSeconds;
     }
 
     public string GetStateName() {

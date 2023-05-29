@@ -8,6 +8,7 @@ public interface IShakeContext {
 }
 
 public class ShakeStatePattern : MonoBehaviour, IShakeContext {
+    private bool beingHandled = false;
     private NavMeshAgent agent;
     private NavMeshPath path;
     private Animator animator;
@@ -18,38 +19,27 @@ public class ShakeStatePattern : MonoBehaviour, IShakeContext {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        this.currentState = new ShakeWaitState();
+        this.currentState = new ShakeWaitState(0);
     }
 
     void Update() {
-        currentState.UpdateState(this);
+        if (!beingHandled)
+            currentState.UpdateState(this);
     }
 
     public void SetState(IShakeState newState) {
-        StartCoroutine(RunSleep(newState, 2));
+        currentState = newState;
+        StartCoroutine(WaitSleep(currentState.WaitSeconds()));
     }
 
-    IEnumerator RunSleep(IShakeState newState, int seconds) {
+    IEnumerator WaitSleep(int seconds) {
+        beingHandled = true;
         yield return new WaitForSeconds(seconds);
-        StartCoroutine(currentState.MoveShake(this.gameObject, animator, agent));
-        currentState = newState;
+        currentState.MoveShake(this.gameObject, animator, agent);
+        beingHandled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "CounterSite2") {
-            QueueProvider.shakePlayerPosition = "ShakeSite2";
-            for (int i = 0 ; i < QueueProvider.shakeQueue[0].Count ; i++) {
-                QueueProvider.shakeQueue[0].Dequeue();
-                //QueueProvider.resultQueue.Enqueue(order);
-            }
-            for (int i = 0 ; i < QueueProvider.shakeQueue[1].Count ; i++) {
-                QueueProvider.shakeQueue[1].Dequeue();
-                //QueueProvider.resultQueue.Enqueue(order);
-            }
-        }
-        
-        if (other.gameObject.tag == "ShakeSite2") {
-            QueueProvider.shakePlayerPosition = "CounterSite2";
-        }
+        currentState.Execute(this, other.gameObject.tag);
     }
 }
