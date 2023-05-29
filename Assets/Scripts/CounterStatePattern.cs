@@ -8,6 +8,7 @@ public interface ICounterContext {
 }
 
 public class CounterStatePattern : MonoBehaviour, ICounterContext {
+    private bool beingHandled = false;
     private NavMeshAgent agent;
     private NavMeshPath path;
     private ICounterState currentState;
@@ -16,26 +17,27 @@ public class CounterStatePattern : MonoBehaviour, ICounterContext {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        currentState = new CounterWaitState();
+        currentState = new CounterWaitState(0);
     }
 
     void Update() {
-        currentState.UpdateState(this);
+        if (!beingHandled)
+            currentState.UpdateState(this);
     }
 
     public void SetState(ICounterState newState) {
-        StartCoroutine(currentState.MoveCounter(this.gameObject, agent));
         currentState = newState;
+        StartCoroutine(WaitSleep(currentState.WaitSeconds()));
+    }
+
+    IEnumerator WaitSleep(int seconds) {
+        beingHandled = true;
+        yield return new WaitForSeconds(seconds);
+        currentState.MoveCounter(this.gameObject, agent);
+        beingHandled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "ChargeSite1"){
-            var order = QueueProvider.counterQueue.Dequeue();
-            if (QueueProvider.chargeQueue[0].Count > QueueProvider.chargeQueue[1].Count) {
-                QueueProvider.chargeQueue[1].Enqueue(order);
-            } else {
-                QueueProvider.chargeQueue[0].Enqueue(order);
-            }
-        }
+        currentState.Execute(this, other.gameObject.tag);
     }
 }

@@ -4,23 +4,41 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class CounterGiveState : ICounterState {
+    private int waitSeconds;
+    private bool arriveCharge = false;
+
+    public CounterGiveState(int waitSeconds) {
+        this.waitSeconds = waitSeconds;
+    }
 
     public void UpdateState(ICounterContext context) {
-        if (QueueProvider.counterQueue.Count == 0) 
-            context.SetState(new CounterWaitState());
+        if (arriveCharge)
+            context.SetState(new CounterWaitState(0));
     }
 
-    public IEnumerator MoveCounter(GameObject gameObject, NavMeshAgent agent) {
-        yield return new WaitForSeconds(1);
+    public void MoveCounter(GameObject gameObject, NavMeshAgent agent) {
         NavMeshPath path = new NavMeshPath();
-        GameObject chargeSite1 = GameObject.FindGameObjectsWithTag("CounterSite1")[0];
+        GameObject chargeSite1 = GameObject.FindGameObjectsWithTag("ChargeSite1")[0];
         agent.SetDestination(chargeSite1.transform.position);
         agent.CalculatePath(chargeSite1.transform.position, path);
-        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        gameObject.GetComponent<SpriteRenderer>().flipX = true;
     }
 
-    public void Execute(ICounterContext context) {
-        // Nothing
+    public void Execute(ICounterContext context, string tagName) {
+        if (tagName == "ChargeSite1") {
+            QueueProvider.arriveCounterSite1 = false;
+            var order = QueueProvider.counterQueue.Dequeue();
+            if (QueueProvider.chargeQueue[0].Count > QueueProvider.chargeQueue[1].Count) {
+                QueueProvider.chargeQueue[1].Enqueue(order);
+            } else {
+                QueueProvider.chargeQueue[0].Enqueue(order);
+            }
+            arriveCharge = true;
+        }
+    }
+
+    public int WaitSeconds() {
+        return this.waitSeconds;
     }
 
     public string GetStateName() {

@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public interface ICounterState {
     public void UpdateState(ICounterContext context);
-    public IEnumerator MoveCounter(GameObject gameObject, NavMeshAgent agent);
-    public void Execute(ICounterContext context);
+    public void MoveCounter(GameObject gameObject, NavMeshAgent agent);
+    public void Execute(ICounterContext context, string tagName);
+    public int WaitSeconds();
     public string GetStateName();
 }

@@ -93,12 +93,13 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     IEnumerator buyDrinksSleep() {
-        yield return new WaitForSeconds(buyDrinkWaitTime);
+        yield return new WaitUntil(() =>
+            QueueProvider.arriveCounterSite1 == true && QueueProvider.counterQueue.Count == 0);
         StartCoroutine(payCompleted());
     }
 
     IEnumerator payCompleted() {
-        yield return new WaitUntil(() => QueueProvider.counterQueue.Count == 0);
+        yield return new WaitForSeconds(buyDrinkWaitTime);
         QueueProvider.counterQueue.Enqueue("order");
         QueueProvider.playerArray[currentWaypointIndex] = 0;
         points = waitDrinks;
