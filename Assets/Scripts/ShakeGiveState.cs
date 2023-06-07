@@ -27,15 +27,17 @@ public class ShakeGiveState : IShakeState {
 
     public void Execute(IShakeContext context, string tagName) {
         if (tagName == "CounterSite2") {
-            if (QueueProvider.shakeQueue[0].Count < QueueProvider.shakeQueue[1].Count) {
-                if (QueueProvider.shakeQueue[1].Count > 0) {
-                    QueueProvider.shakeQueue[1].Dequeue();
-                }
-            } else {
-                if (QueueProvider.shakeQueue[0].Count > 0) {
-                    QueueProvider.shakeQueue[0].Dequeue();
+            int maxCountIndex = 0;
+            for (int i = 0 ; i < QueueProvider.shakeQueue.Length ; i++) {
+                if (QueueProvider.shakeQueue[maxCountIndex].Count < QueueProvider.shakeQueue[i].Count) {
+                    maxCountIndex = i;
                 }
             }
+            if (QueueProvider.shakeQueue[maxCountIndex].Count > 0) {
+                var order = QueueProvider.shakeQueue[maxCountIndex].Dequeue();
+                QueueProvider.resultQueue.Enqueue(order);
+            }
+            Debug.Log("Result Count:" + QueueProvider.resultQueue.Count);
             arriveCounter = true;
         }
     }

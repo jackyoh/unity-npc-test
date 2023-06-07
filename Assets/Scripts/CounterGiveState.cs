@@ -28,11 +28,13 @@ public class CounterGiveState : ICounterState {
         if (tagName == "ChargeSite1") {
             QueueProvider.arriveCounterSite1 = false;
             var order = QueueProvider.counterQueue.Dequeue();
-            if (QueueProvider.chargeQueue[0].Count > QueueProvider.chargeQueue[1].Count) {
-                QueueProvider.chargeQueue[1].Enqueue(order);
-            } else {
-                QueueProvider.chargeQueue[0].Enqueue(order);
+            int minCountIndex = 0;
+            for (int i = 0 ; i < QueueProvider.chargeQueue.Length ; i++) {
+                if (QueueProvider.chargeQueue[minCountIndex].Count > QueueProvider.chargeQueue[i].Count) {
+                    minCountIndex = i;
+                }
             }
+            QueueProvider.chargeQueue[minCountIndex].Enqueue(order);
             arriveCharge = true;
         }
     }
