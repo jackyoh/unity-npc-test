@@ -26,7 +26,6 @@ public class TestDataBase : MonoBehaviour {
         cmd.ExecuteNonQuery();
 
         IDbCommand cmd_read = dbcon.CreateCommand();
-        //IDataReader reader;
         string query = "SELECT * FROM my_table";
         cmd_read.CommandText = query;
         IDataReader reader2 = cmd_read.ExecuteReader();
