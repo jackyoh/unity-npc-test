@@ -44,7 +44,6 @@ public class ChargeGiveState : IChargeState {
                 }
             }
             if (QueueProvider.chargeQueue[maxCountIndex].Count > 0) {
-                Debug.Log("MAX COUNT INDEX:" + maxCountIndex);
                 var order = QueueProvider.chargeQueue[maxCountIndex].Dequeue();
                 QueueProvider.shakeQueue[maxCountIndex].Enqueue(order);
             }

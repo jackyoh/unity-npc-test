@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    // private int playerCount = 0;
     private bool beingHandled = false;
     public GameObject prefab;
     
@@ -13,7 +12,6 @@ public class PlayerController : MonoBehaviour {
         for (int i = 0 ; i < 5 ; i++) {
             QueueProvider.playerArray[i] = 0;
         }
-        // playerCount = playerCount + 1;
         Instantiate(prefab, position, Quaternion.identity);
         QueueProvider.playerQueue.Enqueue("player");
     }
@@ -28,7 +26,6 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(3);
         var position = GameObject.Find("Point1").transform.position;
         if (QueueProvider.playerQueue.Count <= 4) {
-            // playerCount = playerCount + 1;
             Instantiate(prefab, position, Quaternion.identity);
             QueueProvider.playerQueue.Enqueue("player");
         }
