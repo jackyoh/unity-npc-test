@@ -33,9 +33,11 @@ public class PlayerWaitDrink : IPlayerState {
             NavMeshPath path = new NavMeshPath();
             currentWaypointIndex = currentWaypointIndex + 1;
             arrivePoint = false;
+            // agent.SetDestination(waitDrinks[currentWaypointIndex].transform.position - new Vector3(0, QueueProvider.playerQueue.Count * 0.8f, 0));
+            // agent.CalculatePath(waitDrinks[currentWaypointIndex].transform.position - new Vector3(0, QueueProvider.playerQueue.Count * 0.8f, 0), path);
             agent.SetDestination(waitDrinks[currentWaypointIndex].transform.position);
             agent.CalculatePath(waitDrinks[currentWaypointIndex].transform.position, path);
-            
+
             int buyDrinkLength = QueueProvider.playerArray.Length - 1;
             QueueProvider.playerArray[buyDrinkLength] = 0;
         }

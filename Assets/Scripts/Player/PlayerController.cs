@@ -23,9 +23,11 @@ public class PlayerController : MonoBehaviour {
     IEnumerator generatePlayer() {
         beingHandled = true;
         yield return new WaitForSeconds(3);
-        var position = GameObject.Find("Point1").transform.position;
-        Instantiate(prefab, position, Quaternion.identity);
-        QueueProvider.playerQueue.Enqueue("player");
+        if (QueueProvider.playerQueue.Count <= 4) {
+            var position = GameObject.Find("Point1").transform.position;
+            Instantiate(prefab, position, Quaternion.identity);
+            QueueProvider.playerQueue.Enqueue("player");
+        }
         beingHandled = false;
     }
 }

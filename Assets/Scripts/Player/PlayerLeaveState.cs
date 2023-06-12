@@ -39,6 +39,7 @@ public class PlayerLeaveState : IPlayerState {
         arrivePoint = true;
         if (tagName == "DestroyPlayer") {
             context.DestroyGameObject();
+            QueueProvider.playerQueue.Dequeue();
         }
     }
 
