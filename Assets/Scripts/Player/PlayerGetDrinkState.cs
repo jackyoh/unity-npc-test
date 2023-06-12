@@ -50,6 +50,6 @@ public class PlayerGetDrinkState : IPlayerState {
     }
 
     public string GetStateName() {
-        return "get-drink";
+        return "getDrink";
     }
 }

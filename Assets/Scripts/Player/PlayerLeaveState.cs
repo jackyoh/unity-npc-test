@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class PlayerLeaveState : IPlayerState {
     private List<GameObject> leaves = new List<GameObject>();
     private int currentWaypointIndex = 0;
-    private bool arrivePoint = false;
+    private bool arrivePoint = true;
 
     private int waitSeconds;
 
@@ -47,6 +47,6 @@ public class PlayerLeaveState : IPlayerState {
     }
 
     public string GetStateName() {
-        return "leave-state";
+        return "leave";
     }
 }

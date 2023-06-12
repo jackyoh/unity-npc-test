@@ -53,6 +53,6 @@ public class PlayerBuyDrinkState : IPlayerState {
     }
 
     public string GetStateName() {
-        return "buy-drink";
+        return "buy";
     }
 }

@@ -32,16 +32,16 @@ public class PlayerStatePattern : MonoBehaviour,  IPlayerContext{
 
     public void SetState(IPlayerState newState) {
         currentState = newState;
-        StartCoroutine(WaitSleep());
+        StartCoroutine(WaitSleep(currentState.WaitSeconds()));
     }
 
     public void DestroyGameObject() {
         Destroy(this.gameObject);
     }
 
-    IEnumerator WaitSleep() {
+    IEnumerator WaitSleep(int waitSeconds) {
         beingHandled = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(waitSeconds);
         beingHandled = false;
     }
 
