@@ -28,7 +28,7 @@ public class ShakeGiveState : IShakeState {
     public void Execute(IShakeContext context, string tagName) {
         if (tagName == "CounterSite2") {
             int maxCountIndex = 0;
-            for (int i = 0 ; i < QueueProvider.shakeQueue.Length ; i++) {
+            for (int i = 0 ; i < QueueProvider.shakeQueue.Count ; i++) {
                 if (QueueProvider.shakeQueue[maxCountIndex].Count < QueueProvider.shakeQueue[i].Count) {
                     maxCountIndex = i;
                 }

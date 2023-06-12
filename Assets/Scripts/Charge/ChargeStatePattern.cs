@@ -20,6 +20,8 @@ public class ChargeStatePattern : MonoBehaviour, IChargeContext {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         currentState = new ChargeWaitState(0);
+        QueueProvider.chargeQueue.Add(new Queue());
+        QueueProvider.chargeQueue.Add(new Queue());
     }
 
     void Update() {

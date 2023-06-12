@@ -20,6 +20,8 @@ public class ShakeStatePattern : MonoBehaviour, IShakeContext {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         this.currentState = new ShakeWaitState(0);
+        QueueProvider.shakeQueue.Add(new Queue());
+        QueueProvider.shakeQueue.Add(new Queue());
     }
 
     void Update() {

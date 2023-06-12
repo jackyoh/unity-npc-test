@@ -29,7 +29,7 @@ public class CounterGiveState : ICounterState {
             QueueProvider.arriveCounterSite1 = false;
             var order = QueueProvider.counterQueue.Dequeue();
             int minCountIndex = 0;
-            for (int i = 0 ; i < QueueProvider.chargeQueue.Length ; i++) {
+            for (int i = 0 ; i < QueueProvider.chargeQueue.Count ; i++) {
                 if (QueueProvider.chargeQueue[minCountIndex].Count > QueueProvider.chargeQueue[i].Count) {
                     minCountIndex = i;
                 }

@@ -38,7 +38,7 @@ public class ChargeGiveState : IChargeState {
                 }
             }*/
             int maxCountIndex = 0;
-            for (int i = 0 ; i < QueueProvider.chargeQueue.Length ; i++) {
+            for (int i = 0 ; i < QueueProvider.chargeQueue.Count ; i++) {
                 if (QueueProvider.chargeQueue[maxCountIndex].Count < QueueProvider.chargeQueue[i].Count) {
                     maxCountIndex = i;
                 }
