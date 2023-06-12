@@ -53,6 +53,6 @@ public class PlayerWaitDrink : IPlayerState {
     }
 
     public string GetStateName() {
-        return "wait-drink";
+        return "wait";
     }
 }

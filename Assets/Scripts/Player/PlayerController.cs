@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour {
             QueueProvider.playerArray[i] = 0;
         }
         Instantiate(prefab, position, Quaternion.identity);
-        QueueProvider.playerQueue.Enqueue("player");
     }
 
     void Update() {
@@ -25,10 +24,8 @@ public class PlayerController : MonoBehaviour {
         beingHandled = true;
         yield return new WaitForSeconds(3);
         var position = GameObject.Find("Point1").transform.position;
-        if (QueueProvider.playerQueue.Count <= 4) {
-            Instantiate(prefab, position, Quaternion.identity);
-            QueueProvider.playerQueue.Enqueue("player");
-        }
+        Instantiate(prefab, position, Quaternion.identity);
+        QueueProvider.playerQueue.Enqueue("player");
         beingHandled = false;
     }
 }
