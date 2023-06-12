@@ -18,8 +18,9 @@ public class PlayerWaitDrink : IPlayerState {
     }
 
     public void UpdateState(IPlayerContext context) {
-        if (arriveWaitDrinks) {
+        if (arriveWaitDrinks && QueueProvider.isGetDrinks) {
             context.SetState(new PlayerGetDrinkState(3));
+            QueueProvider.isGetDrinks = false;
         }
     }
 
