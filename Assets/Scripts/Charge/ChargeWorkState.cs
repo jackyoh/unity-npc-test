@@ -11,7 +11,7 @@ public class ChargeWorkState : IChargeState {
     }
 
     public void UpdateState(IChargeContext context) {
-        context.SetState(new ChargeGiveState(3));
+        context.SetState(new ChargeGiveState(1));
     }
 
     public void MoveCharge(GameObject gameObject, Animator animator, NavMeshAgent agent) {
