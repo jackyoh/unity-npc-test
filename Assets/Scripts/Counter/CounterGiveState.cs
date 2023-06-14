@@ -27,7 +27,7 @@ public class CounterGiveState : ICounterState {
     public void Execute(ICounterContext context, string tagName) {
         if (tagName == "ChargeSite1") {
             QueueProvider.arriveCounterSite1 = false;
-            var order = QueueProvider.counterQueue.Dequeue();
+            var order = QueueProvider.counterQueue[0].Dequeue();
             int minCountIndex = 0;
             for (int i = 0 ; i < QueueProvider.chargeQueue.Count ; i++) {
                 if (QueueProvider.chargeQueue[minCountIndex].Count > QueueProvider.chargeQueue[i].Count) {

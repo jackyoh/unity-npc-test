@@ -18,6 +18,7 @@ public class CounterStatePattern : MonoBehaviour, ICounterContext {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         currentState = new CounterWaitState(0);
+        QueueProvider.counterQueue.Add(new Queue());
     }
 
     void Update() {

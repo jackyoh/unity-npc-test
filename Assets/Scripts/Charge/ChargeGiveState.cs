@@ -26,17 +26,6 @@ public class ChargeGiveState : IChargeState {
 
     public void Execute(IChargeContext context, string tagName) {
         if (tagName == "ShakeSite1") {
-            /*if (QueueProvider.chargeQueue[0].Count < QueueProvider.chargeQueue[1].Count) {
-                if (QueueProvider.chargeQueue[1].Count > 0) {
-                    var order = QueueProvider.chargeQueue[1].Dequeue();
-                    QueueProvider.shakeQueue[1].Enqueue(order);
-                }
-            } else {
-                if (QueueProvider.chargeQueue[0].Count > 0) {
-                    var order = QueueProvider.chargeQueue[0].Dequeue();
-                    QueueProvider.shakeQueue[0].Enqueue(order);
-                }
-            }*/
             int maxCountIndex = 0;
             for (int i = 0 ; i < QueueProvider.chargeQueue.Count ; i++) {
                 if (QueueProvider.chargeQueue[maxCountIndex].Count < QueueProvider.chargeQueue[i].Count) {

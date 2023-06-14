@@ -11,7 +11,7 @@ public class CounterWaitState : ICounterState {
     }
 
     public void UpdateState(ICounterContext context) {
-        if (QueueProvider.counterQueue.Count > 0)
+        if (QueueProvider.counterQueue[0].Count > 0)
             context.SetState(new CounterGiveState(1));
     }
 

@@ -36,7 +36,6 @@ public class ShakeGiveState : IShakeState {
             if (QueueProvider.shakeQueue[maxCountIndex].Count > 0) {
                 var order = QueueProvider.shakeQueue[maxCountIndex].Dequeue();
                 QueueProvider.resultQueue.Enqueue(order);
-                QueueProvider.isGetDrinks = true;
             }
             arriveCounter = true;
         }
