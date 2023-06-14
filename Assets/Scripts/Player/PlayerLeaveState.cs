@@ -35,7 +35,7 @@ public class PlayerLeaveState : IPlayerState {
         }
     }
 
-    public void Execute(IPlayerContext context, string tagName) {
+    public void Execute(IPlayerContext context, string tagName, NavMeshAgent agent) {
         arrivePoint = true;
         if (tagName == "DestroyPlayer") {
             context.DestroyGameObject();

@@ -8,7 +8,9 @@ public class PlayerWaitDrink : IPlayerState {
     private int currentWaypointIndex = 0;
     private bool arrivePoint = true;
     private bool arriveWaitDrinks = false;
+    private int waitIndex = -1;
     private int waitSeconds;
+
 
     public PlayerWaitDrink(int waitSeconds) {
         this.waitSeconds = waitSeconds;
@@ -32,20 +34,28 @@ public class PlayerWaitDrink : IPlayerState {
             NavMeshPath path = new NavMeshPath();
             currentWaypointIndex = currentWaypointIndex + 1;
             arrivePoint = false;
-        
-            //agent.SetDestination(waitDrinks[currentWaypointIndex].transform.position - new Vector3(0, waitPosition * 0.5f, 0));
-            //agent.CalculatePath(waitDrinks[currentWaypointIndex].transform.position - new Vector3(0, waitPosition * 0.5f, 0), path);
             
             agent.SetDestination(waitDrinks[currentWaypointIndex].transform.position);
             agent.CalculatePath(waitDrinks[currentWaypointIndex].transform.position, path);
+
             int buyDrinkLength = QueueProvider.playerArray.Length - 1;
             QueueProvider.playerArray[buyDrinkLength] = 0;
         }
     }
 
-    public void Execute(IPlayerContext context, string tagName) {
+    public void Execute(IPlayerContext context, string tagName, NavMeshAgent agent) {
         arrivePoint = true;
         if (tagName == "WaitDrinks") {
+            for (int i = 0 ; i < QueueProvider.waitArray.Length ; i++) {
+                if (QueueProvider.waitArray[i] == 0) {
+                    waitIndex = i;
+                    QueueProvider.waitArray[i] = 1;
+                    break;
+                }
+            }
+            NavMeshPath path = new NavMeshPath();
+            agent.SetDestination(waitDrinks[currentWaypointIndex].transform.position + new Vector3(0, waitIndex, 0));
+            agent.CalculatePath(waitDrinks[currentWaypointIndex].transform.position + new Vector3(0, waitIndex, 0), path);
             arriveWaitDrinks = true;
         }
     }

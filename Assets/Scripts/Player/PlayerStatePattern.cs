@@ -46,6 +46,6 @@ public class PlayerStatePattern : MonoBehaviour,  IPlayerContext{
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        currentState.Execute(this, other.gameObject.tag);
+        currentState.Execute(this, other.gameObject.tag, agent);
     }
 }

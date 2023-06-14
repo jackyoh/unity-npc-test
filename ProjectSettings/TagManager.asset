@@ -16,6 +16,7 @@ TagManager:
   - ShakeSite1
   - ShakeSite2
   - Queue
+  - Point8
   layers:
   - Default
   - TransparentFX

@@ -19,7 +19,7 @@ public class PlayerPayState : IPlayerState {
         // Nothing
     }
 
-    public void Execute(IPlayerContext context, string tagName) {
+    public void Execute(IPlayerContext context, string tagName, NavMeshAgent agent) {
         // Nothing
     }
 

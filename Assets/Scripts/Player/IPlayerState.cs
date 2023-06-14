@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public interface IPlayerState {
     public void UpdateState(IPlayerContext context);
     public void MovePlayer(GameObject gameObject, Animator animator, NavMeshAgent agent);
-    public void Execute(IPlayerContext context, string tagName);
+    public void Execute(IPlayerContext context, string tagName, NavMeshAgent agent);
     public int WaitSeconds();
     public string GetStateName();
 }
