@@ -100,7 +100,8 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator payCompleted() {
         yield return new WaitForSeconds(buyDrinkWaitTime);
-        QueueProvider.counterQueue[0].Enqueue("order");
+        QueueProvider.numberPlate = QueueProvider.numberPlate + 1;
+        QueueProvider.counterQueue[0].Enqueue(new Order(QueueProvider.numberPlate, "order"));
         QueueProvider.playerArray[currentWaypointIndex] = 0;
         points = waitDrinks;
         pointStatus = "waitDrinks";

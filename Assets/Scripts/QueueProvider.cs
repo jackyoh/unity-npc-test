@@ -13,4 +13,5 @@ public class QueueProvider {
     public static Queue playerQueue = new Queue();
 
     public static bool arriveCounterSite1 = true;
+    public static int numberPlate = 0;
 }
