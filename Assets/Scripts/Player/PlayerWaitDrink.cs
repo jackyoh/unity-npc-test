@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
+
 
 public class PlayerWaitDrink : IPlayerState {
     private List<GameObject> waitDrinks = new List<GameObject>();
@@ -20,7 +22,16 @@ public class PlayerWaitDrink : IPlayerState {
     }
 
     public void UpdateState(IPlayerContext context) {
-        if (arriveWaitDrinks) {
+        // QueueProvider.resultQueue.ToList();
+        // Debug.Log(context.GetNumberPlate());        
+        bool getDrink = false;
+        foreach (Order order in QueueProvider.resultQueue.ToList()) {
+            if (order.GetOrderId() == context.GetOrder().GetOrderId()) {
+                getDrink = true;
+                break;
+            }
+        }
+        if (arriveWaitDrinks && getDrink) {
             context.SetState(new PlayerGetDrinkState(3));
         }
     }

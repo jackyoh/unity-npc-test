@@ -33,7 +33,7 @@ public class ChargeGiveState : IChargeState {
                 }
             }
             if (QueueProvider.chargeQueue[maxCountIndex].Count > 0) {
-                var order = QueueProvider.chargeQueue[maxCountIndex].Dequeue();
+                var order = (Order)QueueProvider.chargeQueue[maxCountIndex].Dequeue();
                 QueueProvider.shakeQueue[maxCountIndex].Enqueue(order);
             }
             arriveShake = true;

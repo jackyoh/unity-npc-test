@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public interface IPlayerContext {
     public void SetState(IPlayerState newState);
+    public void SetOrder(Order order);
+    public Order GetOrder();
     public void DestroyGameObject();
 }
 
@@ -13,6 +15,7 @@ public class PlayerStatePattern : MonoBehaviour,  IPlayerContext{
     private Animator animator;
     private NavMeshAgent agent;
     private IPlayerState currentState;
+    private Order order;
 
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
@@ -33,6 +36,14 @@ public class PlayerStatePattern : MonoBehaviour,  IPlayerContext{
     public void SetState(IPlayerState newState) {
         currentState = newState;
         StartCoroutine(WaitSleep(currentState.WaitSeconds()));
+    }
+
+    public void SetOrder(Order order) {
+        this.order = order;
+    }
+
+    public Order GetOrder() {
+        return this.order;
     }
 
     public void DestroyGameObject() {

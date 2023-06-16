@@ -6,7 +6,7 @@ public class QueueProvider {
     public static List<Queue> counterQueue = new List<Queue>();
     public static List<Queue> chargeQueue = new List<Queue>();
     public static List<Queue> shakeQueue = new List<Queue>();
-    public static Queue resultQueue = new Queue();
+    public static Queue<Order> resultQueue = new Queue<Order>();
 
     public static int[] playerArray;
     public static int[] waitArray = new int[5];

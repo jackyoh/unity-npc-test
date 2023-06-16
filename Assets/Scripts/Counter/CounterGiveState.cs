@@ -34,7 +34,7 @@ public class CounterGiveState : ICounterState {
                     minCountIndex = i;
                 }
             }
-            QueueProvider.chargeQueue[minCountIndex].Enqueue(order.GetOrderName());
+            QueueProvider.chargeQueue[minCountIndex].Enqueue(order);
             arriveCharge = true;
         }
     }

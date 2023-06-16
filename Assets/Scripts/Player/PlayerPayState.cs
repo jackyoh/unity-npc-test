@@ -12,7 +12,9 @@ public class PlayerPayState : IPlayerState {
 
     public void UpdateState(IPlayerContext context) {
         QueueProvider.numberPlate = QueueProvider.numberPlate + 1;
-        QueueProvider.counterQueue[0].Enqueue(new Order(QueueProvider.numberPlate, "order"));
+        Order order = new Order(QueueProvider.numberPlate, "order");
+        context.SetOrder(order);
+        QueueProvider.counterQueue[0].Enqueue(order);
         context.SetState(new PlayerWaitDrink(3));
     }
 

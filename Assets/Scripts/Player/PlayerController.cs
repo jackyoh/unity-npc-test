@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour {
                 count = count + 1;
             }
         }
-
         if (QueueProvider.playerQueue.Count <= 4 && count > 0) {
             var position = GameObject.Find("Point1").transform.position;
             Instantiate(prefab, position, Quaternion.identity);

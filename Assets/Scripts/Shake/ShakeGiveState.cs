@@ -33,9 +33,11 @@ public class ShakeGiveState : IShakeState {
                     maxCountIndex = i;
                 }
             }
+
             if (QueueProvider.shakeQueue[maxCountIndex].Count > 0) {
-                var order = QueueProvider.shakeQueue[maxCountIndex].Dequeue();
+                var order = (Order)QueueProvider.shakeQueue[maxCountIndex].Dequeue();
                 QueueProvider.resultQueue.Enqueue(order);
+                // Debug.Log("OrderId:" + order.GetOrderId() + ", OrderName:" + order.GetOrderName());
             }
             arriveCounter = true;
         }
