@@ -6,14 +6,9 @@ using NavMeshPlus.Components;
 public class TestNavMeshBuild : MonoBehaviour {
     public NavMeshSurface navMeshSurface;
 
-
-    void Start() {
-       
-    }
-
     void Update() {
         if (Input.GetKeyDown(KeyCode.U)) {
-            Debug.Log("Click U.");
+            Debug.Log("Update navigation for the NavMesh.");
             navMeshSurface.RemoveData();
             navMeshSurface.BuildNavMesh();
         }
